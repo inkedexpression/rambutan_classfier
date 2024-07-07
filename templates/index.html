@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rambutan Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Rambutan Classification</h1>
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+        {% if sweetness_label and variety_label %}
+        <div class="results">
+            <h2>Results:</h2>
+            <p><strong>Sweetness:</strong> {{ sweetness_label }} ({{ sweetness_probability*100|round(2) }}%)</p>
+            <p><strong>Variety:</strong> {{ variety_label }} ({{ variety_probability*100|round(2) }}%)</p>
+            <img src="{{ image_path }}" alt="Uploaded Image">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
